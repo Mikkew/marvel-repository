@@ -1,0 +1,167 @@
+{
+	"info": {
+		"_postman_id": "1f2d4d4c-a041-4233-85df-23aaaf719764",
+		"name": "MARVEL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13649050"
+	},
+	"item": [
+		{
+			"name": "EXTERNAL GET CHARACTERS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://gateway.marvel.com/v1/public/characters?apikey=47e49742e8cb515d3d4909a6f7fdeebb&hash=a47479e2131eb91b7d0ca698674f8037&ts=1&limit=50&offset=50",
+					"protocol": "https",
+					"host": [
+						"gateway",
+						"marvel",
+						"com"
+					],
+					"path": [
+						"v1",
+						"public",
+						"characters"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "47e49742e8cb515d3d4909a6f7fdeebb"
+						},
+						{
+							"key": "hash",
+							"value": "a47479e2131eb91b7d0ca698674f8037"
+						},
+						{
+							"key": "ts",
+							"value": "1"
+						},
+						{
+							"key": "nameStartsWith",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "limit",
+							"value": "50"
+						},
+						{
+							"key": "offset",
+							"value": "50"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EXTERNAL GET CHARACTER BY ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://gateway.marvel.com/v1/public/characters/1011334?apikey=47e49742e8cb515d3d4909a6f7fdeebb&hash=a47479e2131eb91b7d0ca698674f8037&ts=1",
+					"protocol": "https",
+					"host": [
+						"gateway",
+						"marvel",
+						"com"
+					],
+					"path": [
+						"v1",
+						"public",
+						"characters",
+						"1011334"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "47e49742e8cb515d3d4909a6f7fdeebb"
+						},
+						{
+							"key": "hash",
+							"value": "a47479e2131eb91b7d0ca698674f8037"
+						},
+						{
+							"key": "ts",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "INTERNAL GET CHARACTERS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/marvel/characters",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"marvel",
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "INTERNAL GET CHARACTER BY ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/marvel/characters/1010674",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"marvel",
+						"characters",
+						"1010674"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET IMAGE BY CHARACTER",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784/portrait_uncanny.jpg",
+					"protocol": "https",
+					"host": [
+						"i",
+						"annihil",
+						"us"
+					],
+					"path": [
+						"u",
+						"prod",
+						"marvel",
+						"i",
+						"mg",
+						"c",
+						"e0",
+						"535fecbbb9784",
+						"portrait_uncanny.jpg"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
