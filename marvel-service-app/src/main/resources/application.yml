@@ -4,6 +4,8 @@ spring:
   jpa:
     generate-ddl: true
     show-sql: true
+  config:
+    import: optional:file:.env[.properties]
 
 marvel:
   url: https://gateway.marvel.com
@@ -15,4 +17,9 @@ marvel:
 
 server:
   servlet:
-    context-path: /api
+    context-path: /api/v1
+
+jwt:
+  expiration: 70000
+  secret: Cxy74CHx7eZkQI84KVUCDa9d22F3wY1zD4lLoKtEcMHkkrnFBe
+
