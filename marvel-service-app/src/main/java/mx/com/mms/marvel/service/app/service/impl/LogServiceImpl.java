@@ -33,20 +33,24 @@ public class LogServiceImpl implements ILogService {
         } catch (Exception ex) {
             throw new InternalException("Error while getting logs");
         }
-        LOGGER.info("eNDING service LogService for getLogs");
+        LOGGER.info("Ending service LogService for getLogs");
         return logs;
     }
 
     @Override
     @Transactional(readOnly = true)
     public Log getLog(String id) {
+        LOGGER.info("Starting service LogService for getLogById");
         final Log log = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No log: " + id + " not found"));
+        LOGGER.info("Ending service LogService for getLogById");
         return log;
     }
 
     @Override
     public Log createLog(Log log) {
+        LOGGER.info("Starting service LogService for Save Log");
         final Log newLog = repository.save(log);
+        LOGGER.info("Ending service LogService for Save Log");
         return newLog;
     }
 }
