@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: marvel-service-app
+  jpa:
+    generate-ddl: true
+    show-sql: true
+
+marvel:
+  url: https://gateway.marvel.com
+  apiKey: 47e49742e8cb515d3d4909a6f7fdeebb
+  hash: a47479e2131eb91b7d0ca698674f8037
+  ts: 1
+  endpoints:
+    characters: /v1/public/characters
+
+server:
+  servlet:
+    context-path: /api
