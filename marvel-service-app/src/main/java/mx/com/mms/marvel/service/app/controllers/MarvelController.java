@@ -12,10 +12,7 @@ import mx.com.mms.marvel.service.app.service.IMarvelServiceAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -31,15 +28,15 @@ public class MarvelController {
     private final ResponseConverter converter;
 
     @Autowired
-    public MarvelController(IMarvelServiceAPI marvelService, ILogService logService, ResponseConverter converter) {
+    private MarvelController(IMarvelServiceAPI marvelService, ILogService logService, ResponseConverter converter) {
         this.marvelService = marvelService;
         this.logService = logService;
         this.converter = converter;
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getCharacters(@RequestBody Optional<ParamsContext> paramsContext) {
-        LOGGER.info("Starting getCharacters................................................................");
+    public ResponseEntity<BodyRequest> getCharacters(@RequestBody Optional<ParamsContext> paramsContext) {
+        LOGGER.info("Starting getCharacters");
         final LocalDateTime start = LocalDateTime.now();
         final Map<String, Object> response = marvelService.getCharacters(paramsContext);
         final BodyRequest result = converter.bodyRequestToRequestCharacter((ResponseCharacter) response.get("response"));
@@ -51,7 +48,25 @@ public class MarvelController {
                 .endInternalRequest(end)
                 .build();
         logService.createLog(log);
-        LOGGER.info("Finished getCharacters................................................................");
+        LOGGER.info("Finished getCharacters");
+        return ResponseEntity.status(result.getStatusCode()).body(result);
+    }
+
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BodyRequest> getCharacterById(@PathVariable Integer id) {
+        LOGGER.info("Starting getCharacterById");
+        final LocalDateTime start = LocalDateTime.now();
+        final Map<String, Object> response = marvelService.getCharacterById(id);
+        final BodyRequest result = converter.bodyRequestToRequestCharacter((ResponseCharacter) response.get("response"));
+        final LocalDateTime end = LocalDateTime.now();
+        final Log log = Log.builder()
+                .startMarvelApiRequest((LocalDateTime) response.get("start"))
+                .endMarvelApiRequest((LocalDateTime) response.get("end"))
+                .startInternalRequest(start)
+                .endInternalRequest(end)
+                .build();
+        logService.createLog(log);
+        LOGGER.info("Finished getCharacterById");
         return ResponseEntity.status(result.getStatusCode()).body(result);
     }
 }
