@@ -1,5 +1,6 @@
 package mx.com.mms.marvel.service.app.service.impl;
 
+import mx.com.mms.marvel.service.app.exceptions.ResourceNotFoundException;
 import mx.com.mms.marvel.service.app.models.entities.User;
 import mx.com.mms.marvel.service.app.repositories.UserRepository;
 import mx.com.mms.marvel.service.app.service.IUserService;
@@ -20,8 +21,16 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public User findUserByUsername(String username) {
+        return repository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("Username " + username + " not found"));
+    }
+
+    @Override
     @Transactional
     public Optional<User> createUser(Optional<User> user) {
-        return Optional.of(repository.save(user.get()));
+        if(repository.existsByUsername(user.get().getUsername())) {
+            return Optional.of(repository.save(user.get()));
+        }
+        throw new ResourceNotFoundException("Username exist");
     }
 }

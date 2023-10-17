@@ -6,5 +6,7 @@ import java.util.Optional;
 
 public interface IUserService {
 
+    User findUserByUsername(String username);
+
     Optional<User> createUser(Optional<User> user);
 }
